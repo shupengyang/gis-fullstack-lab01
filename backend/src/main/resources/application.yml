@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gis-backend
+
+# PostGIS 数据源配置（需要启动 Docker PostGIS 容器后使用）
+# spring:
+#   datasource:
+#     url: jdbc:postgresql://localhost:5432/gisdb
+#     username: postgres
+#     password: postgres
+#     driver-class-name: org.postgresql.Driver

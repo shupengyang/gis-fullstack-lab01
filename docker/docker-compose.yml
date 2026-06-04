@@ -1,0 +1,45 @@
+# Docker Compose 编排文件
+# 服务：PostGIS 空间数据库 + pgAdmin 管理界面
+# 用法：docker compose up -d
+
+services:
+  # PostGIS 空间数据库
+  postgis:
+    image: postgis/postgis:16-3.4
+    container_name: gis-postgis
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: gisdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d gisdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # pgAdmin 数据库管理界面
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: gis-pgadmin
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gislab.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgis:
+        condition: service_healthy
+
+volumes:
+  postgis_data:
+    driver: local
+  pgadmin_data:
+    driver: local
