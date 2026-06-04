@@ -1,0 +1,53 @@
+# ========================
+# GIS 全栈开发项目 .gitignore
+# ========================
+
+# --- Node.js / 前端 ---
+node_modules/
+dist/
+.vite/
+*.local
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.egg
+.eggs/
+
+# --- Java / Maven ---
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/wrapper/maven-wrapper.jar
+
+# --- IDE ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Docker ---
+docker/pgdata/
+
+# --- 环境变量 ---
+.env
+.env.local
+.env.*.local
+
+# --- 日志 ---
+*.log
+logs/
